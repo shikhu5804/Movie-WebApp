@@ -6,6 +6,7 @@ import Horcards from "../Partials/Horcards";
 import Loading from "../Partials/Loading";
 import noimage from "/noimage.png";
 
+
 const TvDetails = () => {
   const navigate = useNavigate();
   const { info } = useSelector((state) => state.tv);
