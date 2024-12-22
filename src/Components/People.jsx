@@ -25,7 +25,6 @@ const People = () => {
       console.log("Error:", error);
     }
   };
-  console.log(people);
 
   useEffect(() => {
     getPeople(category);
@@ -40,7 +39,7 @@ const People = () => {
 
 
   return people.length>0 ? (
-    <div className="w-screen h-screen px-8 text-white overflow-auto">
+    <div className="w-screen h-screen px-8 overflow-x-hidden text-white overflow-auto">
       <div className="w-full h-[10vh] flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <i
@@ -48,10 +47,10 @@ const People = () => {
             className="text-zinc-400 text-2xl relative z-40 hover:text-[#6556CD] ri-arrow-left-line mt-1 cursor-pointer"
           ></i>
           
-          <h1 className="font-bold text-2xl text-zinc-400">people ({category})</h1>
+          <h1 className="font-bold text-2xl text-zinc-400">People <span className="text-[#6556CD]">({category})</span></h1>
         </div>
 
-        <div className="flex-1 flex backdrop-blur-0 bg-transparent ml-[-20%] z-10 p-7 justify-center ">
+        <div className="flex-1 flex backdrop-blur-0 bg-transparent ml-[-10%] z-10 p-7 justify-center ">
           <Topbar />
         </div>
 
@@ -83,7 +82,9 @@ const People = () => {
         ))}
       </div>
     </div>
-  ):<h1><Loading /></h1>;
+  ):( <h1 className="text-white bg-black font-black flex items-center justify-center text-5xl h-screen w-screen">
+    <Loading />
+  </h1>)
 };
 
 export default People;

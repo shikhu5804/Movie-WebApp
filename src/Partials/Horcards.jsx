@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import noimage from "/noimage.png";
 
-const Horicards = ({ trending, customWidth }) => {
+const Horicards = ({ trending, customWidth  }) => {
   return (
     <div className="mt-2 mb-9">
       {/* <div className="flex justify-between items-center">
@@ -15,7 +15,7 @@ const Horicards = ({ trending, customWidth }) => {
         {trending.map((d, i) => (
           <div
             key={i}
-            className={`min-w-[16%] hover:scale-105 transform transition-transform duration-200 ${customWidth || "min-w-[16%]"}`}
+            className={`min-w-[16%] hover:scale-[1.03]  transform transition-transform duration-300 ${customWidth || "min-w-[16%]"}`}
           >
             <Link
               to={`/${d.media_type}/details/${d.id}`}
@@ -41,12 +41,11 @@ const Horicards = ({ trending, customWidth }) => {
                     ? d.overview.slice(0, 80)
                     : "No overview available"}
                   {d.overview.length > 0 && (
-                    <Link
-                      to={`/${d.media_type}/details/${d.id}`}
+                    <span
                       className="text-blue-400 ml-1 hover:underline"
                     >
                       ...more
-                    </Link>
+                    </span>
                   )}
                 </p>
               </div>

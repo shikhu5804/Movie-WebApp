@@ -1,22 +1,26 @@
-import React from 'react';
-import Sidenav from '../Partials/Sidenav';
-import Topbar from '../Partials/Topbar';
-import Header from '../Partials/Header';
-import Horicards from '../Partials/Horicards';
+import React, { useState } from "react";
+import Sidenav from "../Partials/Sidenav";
+import Topbar from "../Partials/Topbar";
+import Header from "../Partials/Header";
+import Horicards from "../Partials/Horicards";
 
 const Home = () => {
-  
-    document.title = "Home";
-    return (
-      <div className='flex overflow-hidden'>
-        <Sidenav />
-        <div className='w-[80%] h-full ml-[20%] pl-3 overflow-x-hidden '>
-            <Topbar  />
-          <Header />
-          <Horicards/>
-        </div>
+  const [loading, setLoading] = useState(true);
+
+  document.title = "Home";
+
+  return (
+    <div className="w-[100%]">
+    <div className="flex w-[20%] relative z-20 overflow-hidden">
+      <Sidenav />
+       </div>
+      <div className="w-[80%] absolute  bg-zinc-900 h-full ml-[20%] pl-3 overflow-x-hidden">
+      {!loading && <Topbar isHome={true} />}
+      <Header setLoading={setLoading} />
+        <Horicards />
       </div>
-    );
+      </div>
+  );
 };
 
 export default Home;

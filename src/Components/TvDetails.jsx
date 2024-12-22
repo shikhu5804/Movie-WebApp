@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { asyncloadtv, removetv } from "../Store/Actions/TvActions";
 import Horcards from "../Partials/Horcards";
 import Loading from "../Partials/Loading";
 import noimage from "/noimage.png";
 
-
 const TvDetails = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { info } = useSelector((state) => state.tv);
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -22,22 +22,22 @@ const TvDetails = () => {
 
   useEffect(() => {
     if (info && info.detail) {
-      document.title = `${info.detail.original_name} - Tv Details`;
+      document.title = `${info.detail.original_name}`;
     }
   }, [info]);
 
   return info ? (
     <div
-      className="h-[100vh] overflow-auto w-full p-5"
+      className="h-[100vh] relative overflow-auto w-full p-5"
       style={{
-        background: ` linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .5), rgba(0, 0, 0, .8)), url(https://image.tmdb.org/t/p/original/${info.detail.backdrop_path})`,
+        background: `linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .5), rgba(0, 0, 0, .6)), url(https://image.tmdb.org/t/p/original/${info.detail.backdrop_path})`,
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
       }}
     >
       {/* Topbar */}
-      <nav className="flex items-center justify-between mb-2 px-6 bg-black/5  text-xl text-white">
+      <nav className="flex items-center justify-between mb-2 px-6 bg-black/5 text-xl text-white">
         {/* Back Button */}
         <div className="flex gap-10">
           <i
@@ -55,9 +55,12 @@ const TvDetails = () => {
 
         {/* External Links */}
         <div className="flex gap-6 items-center">
-          {/* Website Link */}
           <a target="_blank" title="Website" href={info.detail.homepage}>
-            <i className="ri-earth-fill text-2xl hover:text-[#6556CD] transition duration-300"></i>
+            <img
+              className="w-[7vh] rounded-md"
+              src="https://cdn-icons-png.freepik.com/512/1927/1927746.png?ga=GA1.1.1925957040.1723322691"
+              alt="IMDB Logo"
+            />
           </a>
 
           {/* Wikidata Link */}
@@ -66,14 +69,18 @@ const TvDetails = () => {
             target="_blank"
             href={`https://www.wikidata.org/wiki/${info.externalid.wikidata_id}`}
           >
-            <i className="ri-external-link-line text-2xl hover:text-[#6556CD] transition duration-300"></i>
+            <img
+              className="w-[6vh] rounded-md"
+              src="https://cdn-icons-png.freepik.com/512/2274/2274790.png?ga=GA1.1.1925957040.1723322691"
+              alt="IMDB Logo"
+            />
           </a>
 
           {/* IMDb Link */}
           <a
-            title="Wikidata"
+            title="Imdb"
             target="_blank"
-            href={`https://www.imdb.com/name/${info.externalid.imdb_id}`}
+            href={`https://www.imdb.com/title/${info.externalid.imdb_id}`}
           >
             <img
               className="w-[9vh] rounded-md"
@@ -89,7 +96,7 @@ const TvDetails = () => {
         {/* Left Section */}
         <div className="mt-5 lg:w-[40%] flex-col mb-5">
           <img
-            className="h-[50vh] w-[50vh] hover:scale-105 shadow-lg object-cover duration-150 mb-3 rounded-2xl"
+            className="h-[50vh] w-[50vh] hover:scale-[1.03] shadow-lg object-cover duration-200 mb-3 rounded-2xl"
             src={`https://image.tmdb.org/t/p/original/${
               info.detail.backdrop_path || info.detail.poster_path
             }`}
@@ -179,7 +186,10 @@ const TvDetails = () => {
             {info.translations.join(", ")}
           </p>
           <div className="mb-10">
-            <Link className="hover:text-white text-zinc-200 font-semibold p-4 rounded-xl bg-[#6556CD]">
+            <Link
+              to={`${pathname}/trailer`}
+              className="hover:text-white text-zinc-200 font-semibold p-4 rounded-xl bg-[#6556CD]"
+            >
               <i className="ri-play-fill mr-2"></i>
               Watch Trailer
             </Link>
@@ -199,7 +209,7 @@ const TvDetails = () => {
           {info.detail.seasons.map((s, i) => (
             <div
               key={i}
-              className="min-w-[15vw] max-w-[15vw]  transform hover:scale-105 transition-transform duration-300"
+              className="min-w-[15vw] max-w-[15vw] transform hover:scale-105 transition-transform duration-300"
             >
               <div className="flex flex-col bg-zinc-800 shadow-lg rounded-2xl overflow-hidden">
                 <img
@@ -229,26 +239,67 @@ const TvDetails = () => {
           ))}
         </div>
       </div>
+      <hr className="border-none h-[1px] bg-zinc-300" />
+
+      {/* Casts Section */}
+      {info.credits.cast.length > 0 && (
+        <div className="p-5 ">
+          <div className="flex justify-between items-center">
+            <h1 className="text-white text-3xl font-black mb-4">Casts</h1>
+          </div>
+          <div className="w-full text-white mb-10 overflow-x-auto overflow-y-hidden flex gap-x-6 pb-4">
+            {info.credits.cast.map((c, i) => (
+              <Link to={`/person/details/${c.id}`} key={i}>
+                <div className="min-w-[15vw] max-w-[15vw]  transform hover:scale-105 transition-transform duration-300">
+                  <div className="flex flex-col bg-zinc-800 shadow-lg rounded-2xl overflow-hidden">
+                    <img
+                      className="h-[35vh] w-full object-cover"
+                      src={
+                        c.profile_path
+                          ? `https://image.tmdb.org/t/p/original/${c.profile_path}`
+                          : noimage
+                      }
+                      alt={c.name}
+                    />
+                    <div className="p-4">
+                      <h1 className="text-xl sm:text-xl font-black mb-2">
+                        {c.name}
+                      </h1>
+                      <p className="text-zinc-400 text-sm">{c.character}</p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Recommendations */}
       <hr className="border-none h-[1px] bg-zinc-300" />
-      <div className="p-5 ">
-      <div className="flex justify-between items-center">
-          <h1 className="text-white text-3xl font-black mb-2">Recommendations & Similars</h1>
+      {(info.recommendations.length > 0 || info.similar.length>0) && (
+        <div className="p-5 ">
+          <div className="flex justify-between items-center">
+            <h1 className="text-white text-3xl font-black mb-4">
+              Recommendations & Similars
+            </h1>
+          </div>
+          {info.recommendations && (
+            <Horcards
+              trending={
+                info.recommendations.length > 0
+                  ? info.recommendations
+                  : info.similar
+              }
+            />
+          )}
         </div>
-        {info.recommendations && (
-          <Horcards
-            trending={
-              info.recommendations.length > 0
-                ? info.recommendations
-                : info.similar
-            }
-          />
-        )}
-      </div>
+      )}
+
+      <Outlet />
     </div>
   ) : (
-    <h1 className="text-white bg-zinc-800 font-black flex items-center justify-center text-5xl h-screen w-screen">
+    <h1 className="text-white bg-black font-black flex items-center justify-center text-5xl h-screen w-screen">
       <Loading />
     </h1>
   );

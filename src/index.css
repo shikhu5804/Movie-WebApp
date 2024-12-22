@@ -16,3 +16,8 @@
     background: #6556CD;
     border-radius: 5px;
 }
+
+input::placeholder {
+  color: white;
+}
+  

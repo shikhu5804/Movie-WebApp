@@ -18,7 +18,6 @@ export const asyncloadperson = (id) => async (dispatch, getState) =>{
             moviecredits: moviecredits.data,
 
         };
-        console.log(theultimatedetails);
         dispatch(loadperson(theultimatedetails));
     }
     catch(error){

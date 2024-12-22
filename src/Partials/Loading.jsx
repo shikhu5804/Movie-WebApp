@@ -1,11 +1,15 @@
-import React from 'react'
+import React from "react";
 
 const Loading = () => {
   return (
-    <div className='bg-black flex justify-center items-center'>
-        <img className='h-[70vh] object-cover bg-zinc-600' src="/ani.gif" alt="" />
+    <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center bg-black">
+      <img
+        className="h-[60vh] object-cover"
+        src="/globe2.gif"
+        alt="Loading"
+      />
     </div>
-  )
-}
+  );
+};
 
-export default Loading
+export default Loading;

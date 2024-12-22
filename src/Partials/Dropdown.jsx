@@ -16,7 +16,7 @@ function Dropdown({ onSelectChange, children }) {
       <select
         value={selectedValue}
         onChange={handleChange}
-        className="block w-full px-3 py-1 text-black bg-white border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+        className="block w-full px-3 py-1 text-zinc-300 bg-black border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
       >
         {children}
       </select>

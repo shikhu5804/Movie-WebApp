@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 const Sidenav = () => {
   return (
     <div className=" w-[20.5%] bg-[#111827]  h-screen border-r-2 border-zinc-400 p-5 fixed">
-      <h1 className="text-3xl text-white font-bold gap-5 flex">
-        <i className="text-[#6556CD] ri-tv-fill"></i>
-        <span className="font-black ">SHIKHAR</span>
+      <h1 className="text-3xl text-white font-bold gap-5 flex items-center">
+        <img className="w-[7vh]" src="https://cdn-icons-png.freepik.com/512/8936/8936507.png?ga=GA1.1.1925957040.1723322691" alt="" />
+        {/* <i className="text-[#6556CD] ri-tv-fill"></i> */}
+        <span className="font-black ">BingeBox</span>
       </h1>
 
       <nav className="flex flex-col text-zinc-400 text-l gap-2 ">
@@ -38,8 +39,8 @@ const Sidenav = () => {
         <Link to="/contact" className="text-zinc-400 hover:bg-[#6556CD] hover:p-6 hover:text-white duration-300 rounded-lg p-5">
           <i className="mr-2 text-2xl ri-contacts-line"></i>Contact Shikhar
         </Link>
-        <Link className="text-zinc-400 hover:bg-[#6556CD] hover:p-6 hover:text-white duration-300 rounded-lg p-5">
-          <i className="mr-2 text-2xl ri-info-i"></i>About Us
+        <Link to="/about_me" className="text-zinc-400 hover:bg-[#6556CD] hover:p-6 hover:text-white duration-300 rounded-lg p-5">
+          <i className="mr-2 text-2xl ri-info-i"></i>About Me
         </Link>
       </nav>
     </div>

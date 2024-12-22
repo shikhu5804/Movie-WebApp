@@ -22,7 +22,6 @@ const Popular = () => {
       console.log("Error:", error);
     }
   };
-  console.log(popular);
 
   useEffect(() => {
     getPopular(category);
@@ -32,8 +31,8 @@ const Popular = () => {
     setCategory(value);
   };
 
-  return (
-    <div className="w-screen h-screen px-8 text-white overflow-auto">
+  return popular ?(
+    <div className="w-screen h-screen px-8 text-white overflow-x-hidden">
       <div className="w-full h-[10vh] flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <i
@@ -62,8 +61,9 @@ const Popular = () => {
         {popular.map((c, i) => (
           <Link to={`/${c.media_type || category }/details/${c.id}`} key={i} className="w-[35vh] relative ">
             {" "}
+            <div className="relative w-full"> 
             <img
-              className="h-[45vh] object-cover hover:scale-105 duration-150 mb-3 rounded-2xl"
+              className="h-[45vh] object-cover hover:scale-[1.03] duration-200 mb-3 rounded-2xl"
               src={
                 c.backdrop_path || c.profile_path
                   ? `https://image.tmdb.org/t/p/original/${
@@ -73,17 +73,22 @@ const Popular = () => {
               }
               alt=""
             />
+           
+            <div className="absolute bottom-[5%] right-[-8%] rounded-full h-[6vh] w-[6vh] flex items-center justify-center text-xl z-8 bg-yellow-500 text-white font-semibold">
+             {(c.vote_average * 10).toFixed()}<sup>%</sup>
+            </div>
+            </div>
             <h1 className="text-xl mb-7 font-black hover:text-[#6556CD]">
               {c.name || c.title || c.original_name || c.original_title}
             </h1>
-            <div className="absolute bottom-[25%] right-[-10%] rounded-full h-[6vh] w-[6vh] flex items-center justify-center text-xl z-8 bg-yellow-500 text-white font-semibold">
-             {(c.vote_average * 10).toFixed()}<sup>%</sup>
-            </div>
-            
           </Link>
         ))}
       </div>
     </div>
+  ):(
+    <h1 className="text-white bg-black font-black flex items-center justify-center text-5xl h-screen w-screen">
+      <Loading />
+    </h1>
   );
 };
 
