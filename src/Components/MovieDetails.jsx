@@ -97,7 +97,6 @@ const MovieDetails = () => {
           </a>
         </div>
       </nav>
-
       {/* Content Sections */}
       <div className="flex flex-col lg:flex-row w-full">
         {/* Left Section */}
@@ -239,8 +238,11 @@ const MovieDetails = () => {
           </div>
         </div>
       )}
-
+      <hr className="border-none h-[1px] bg-zinc-300 mb-8" />
       {/* Recommendations or Similar Movies */}
+      <h1 className="text-white text-3xl font-black mb-4">
+        Recommendations & Similars
+      </h1>{" "}
       {(info.recommendations.length > 0 || info.similar.length > 0) && (
         <Horcards
           trending={
