@@ -8,7 +8,6 @@ const Stream = () => {
   const { id } = useParams(); 
   const category = pathname.includes("movie") ? "movie" : "tv";
   const imdb = useSelector((state) => state[category].info.externalid.imdb_id);
-  console.log(imdb);
 
 
   return (

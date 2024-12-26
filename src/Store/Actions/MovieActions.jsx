@@ -22,7 +22,6 @@ export const asyncloadmovie = (id) => async (dispatch, getState) =>{
             videos: videos.data.results.find(m=>m.type === "Trailer"),
             watchproviders: watchproviders.data.results.IN,
         };
-        console.log(theultimatedetails);
         dispatch(loadmovie(theultimatedetails));
     }
     catch(error){

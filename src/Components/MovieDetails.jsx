@@ -32,7 +32,6 @@ const MovieDetails = () => {
     }
   }, [info]);
 
-  console.log(info);
 
   return info ? (
     <div
