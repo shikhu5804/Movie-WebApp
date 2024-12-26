@@ -44,7 +44,7 @@ const Header = ({ setLoading }) => {
       }}
     >
      
-      <h1 className="text-6xl font-black text-white">
+      <h1 className="text-6xl w-[110vh] font-black text-white">
         {wallpaper.name ||
           wallpaper.title ||
           wallpaper.original_name ||
