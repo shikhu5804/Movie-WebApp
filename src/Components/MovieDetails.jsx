@@ -104,7 +104,7 @@ const MovieDetails = () => {
         {/* Left Section */}
         <div className="mt-5 lg:w-[25%] flex-col mb-5">
           <img
-            className="h-[50vh] w-[50vh] hover:scale-[1.03] duration-200 shadow-lg object-cover  mb-3 rounded-2xl"
+            className="h-[50vh] w-[50vh] hover:scale-[1.01] duration-200 shadow-lg object-cover  mb-3 rounded-2xl"
             src={`https://image.tmdb.org/t/p/original/${
               info.detail.backdrop_path || info.detail.poster_path
             }`}

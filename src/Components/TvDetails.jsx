@@ -102,7 +102,7 @@ const TvDetails = () => {
         {/* Left Section */}
         <div className="mt-5 lg:w-[25%] flex-col mb-5">
           <img
-            className="h-[50vh] w-[50vh] hover:scale-[1.03] shadow-lg object-cover duration-200 mb-3 rounded-2xl"
+            className="h-[50vh] w-[50vh] hover:scale-[1.01] shadow-lg object-cover duration-200 mb-3 rounded-2xl"
             src={`https://image.tmdb.org/t/p/original/${
               info.detail.backdrop_path || info.detail.poster_path
             }`}
@@ -164,7 +164,7 @@ const TvDetails = () => {
             {info.detail.tagline}
           </h1>
           <div className="flex items-center gap-10 mt-5">
-            <div className="rounded-full h-[6vh] w-[6vh] flex items-center justify-center font-black bg-yellow-500 text-white">
+            <div className="rounded-full h-[6vh] w-[6vh] flex items-center justify-center font-black bg-yellow-600 text-white">
               {(info.detail.vote_average * 10).toFixed()}
               <sup>%</sup>
             </div>
@@ -204,7 +204,7 @@ const TvDetails = () => {
             <div className="mb-10">
               <Link
                 to={`${pathname}/stream`}
-                className="hover:text-white text-zinc-200 font-semibold p-4 rounded-xl bg-[#6556CD]"
+                className="hover:text-white text-zinc-200 font-semibold p-4 rounded-xl bg-yellow-600"
               >
                 <i className="ri-play-fill mr-2"></i>
                 Stream{" "}

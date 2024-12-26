@@ -26,7 +26,7 @@ const Topbar = ({ isHome, setLoading }) => {
     style={{
       marginLeft: isHome ? "1%" : "15%",
       backgroundColor: isHome ? "rgba(0, 0, 0, 0.1)" : "transparent",  // bg-black with opacity for non-home
-      backdropFilter: isHome ? "blur(6px)" : "none",  // Apply blur effect when isHome is true
+      backdropFilter: isHome ? "blur(4px)" : "none",  // Apply blur effect when isHome is true
     }}
   >
       <div className="flex w-[100vh] items-center">
