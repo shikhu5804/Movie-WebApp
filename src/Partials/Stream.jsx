@@ -9,10 +9,10 @@ const Stream = () => {
   const { id } = useParams();
   const category = pathname.includes("movie") ? "movie" : "tv";
   const imdb = useSelector((state) => state[category].info.externalid.imdb_id);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
 
   const handleIframeLoad = () => {
-    setLoading(false);  
+    setLoading(false);
   };
 
   return (
@@ -22,19 +22,17 @@ const Stream = () => {
         className="text-zinc-300 absolute top-10 right-20 text-3xl hover:text-[#6556CD] ri-close-line cursor-pointer transition duration-300"
       ></i>
 
-      {loading && (
-       <Loading/>
-      )}
+      {loading && <Loading />}
 
       <iframe
-        referrerPolicy="origin"
-        src={`https://vidsrc.xyz/embed/${category}/${imdb}`}
+        src={`https://vidsrc.me/embed/${category}/${imdb}`}
+        referrerpolicy="origin"
         width="1200"
         height="600"
         frameBorder="0"
         allowFullScreen
         className="rounded-xl"
-        onLoad={handleIframeLoad}  
+        onLoad={handleIframeLoad}
       ></iframe>
     </div>
   );
