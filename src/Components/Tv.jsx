@@ -46,11 +46,11 @@ const Tv = () => {
           </h1>
         </div>
 
-        <div className="flex-1 flex backdrop-blur-0 bg-transparent z-10 ml-[-20%] p-7 justify-center ">
+        <div className="flex-1 relative z-5 flex backdrop-blur-0 bg-transparent z-10 ml-[-20%] p-7 justify-center ">
           <Topbar />
         </div>
 
-        <div className="flex space-x-4 ">
+        <div className="flex space-x-4 relative z-20">
           <Dropdown title="Category" onSelectChange={handleSelectChange}>
             <option value="airing_today">Airing Today</option>
             <option value="on_the_air">On The Air</option>

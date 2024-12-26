@@ -22,15 +22,22 @@ const Topbar = ({ isHome, setLoading }) => {
 
   return (
     <div
-      className="absolute top-0 left-0 z-[200] bg-black/5 backdrop-blur-sm w-[100%] h-[8vh] text-white flex items-center justify-center"
-      style={{ marginLeft: isHome ? "1%" : "15%" }}
-    >
+    className="absolute top-0 left-0 z-[200] w-[100%] h-[8vh] text-white flex items-center justify-center"
+    style={{
+      marginLeft: isHome ? "1%" : "15%",
+      backgroundColor: isHome ? "rgba(0, 0, 0, 0.1)" : "transparent",  // bg-black with opacity for non-home
+      backdropFilter: isHome ? "blur(6px)" : "none",  // Apply blur effect when isHome is true
+    }}
+  >
       <div className="flex w-[100vh] items-center">
         <i className="ri-search-line text-3xl"></i>
         <input
           onChange={(e) => setQuery(e.target.value)}
           value={query}
-          style={{ width: isHome ? "60%" : "54%", height : isHome ? "7vh" : "6vh" }}
+          style={{
+            width: isHome ? "60%" : "54%",
+            height: isHome ? "7vh" : "6vh",
+          }}
           className="bg-transparent text-white font-bold w-[70%] rounded-2xl mx-10 text-l p-3 border-2 border-purple-300"
           type="text"
           placeholder="Search Anything"
@@ -45,11 +52,13 @@ const Topbar = ({ isHome, setLoading }) => {
 
       {/* Display search results */}
       {search.length > 0 && (
-        <div 
-        style={{ width: isHome ? "50%" : "40%",
-          marginLeft : isHome ? "-12%" : "-15%",
-        }}
-        className="absolute overflow-auto overflow-x-hidden flex-col  max-h-[50vh] top-[100%] ml-[-12%] rounded bg-zinc-300">
+        <div
+          style={{
+            width: isHome ? "50%" : "40%",
+            marginLeft: isHome ? "-12%" : "-15%",
+          }}
+          className="absolute overflow-auto overflow-x-hidden flex-col  max-h-[50vh] top-[100%] ml-[-12%] rounded bg-zinc-300"
+        >
           {search.map((s, i) => (
             <Link
               to={`/${s.media_type || "movie"}/details/${s.id}`}

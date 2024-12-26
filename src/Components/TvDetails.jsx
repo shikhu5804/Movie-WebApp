@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { asyncloadtv, removetv } from "../Store/Actions/TvActions";
 import Horcards from "../Partials/Horcards";
 import Loading from "../Partials/Loading";
@@ -92,9 +98,9 @@ const TvDetails = () => {
       </nav>
 
       {/* Content Sections */}
-      <div className="flex flex-col lg:flex-row w-full">
+      <div className="flex flex-col lg:flex-row w-[100%] gap-5">
         {/* Left Section */}
-        <div className="mt-5 lg:w-[40%] flex-col mb-5">
+        <div className="mt-5 lg:w-[25%] flex-col mb-5">
           <img
             className="h-[50vh] w-[50vh] hover:scale-[1.03] shadow-lg object-cover duration-200 mb-3 rounded-2xl"
             src={`https://image.tmdb.org/t/p/original/${
@@ -147,7 +153,7 @@ const TvDetails = () => {
         </div>
 
         {/* Right Section */}
-        <div className="w-[70%] mt-2 ml-[-12%]">
+        <div className="lg:w-[70%] mt-2 ">
           <h1 className="text-5xl text-white font-black mb-1">
             {info.detail.original_name}
             <small className="text-zinc-200 text-2xl font-black">
@@ -185,14 +191,25 @@ const TvDetails = () => {
           <p className="text-zinc-200 font-semibold mt-3 mb-8">
             {info.translations.join(", ")}
           </p>
-          <div className="mb-10">
-            <Link
-              to={`${pathname}/trailer`}
-              className="hover:text-white text-zinc-200 font-semibold p-4 rounded-xl bg-[#6556CD]"
-            >
-              <i className="ri-play-fill mr-2"></i>
-              Watch Trailer
-            </Link>
+          <div className="flex gap-10">
+            <div className="mb-10 ">
+              <Link
+                to={`${pathname}/trailer`}
+                className="hover:text-white text-zinc-200 font-semibold p-4 rounded-xl bg-[#6556CD]"
+              >
+                <i className="ri-play-fill mr-2"></i>
+                Watch Trailer
+              </Link>
+            </div>
+            <div className="mb-10">
+              <Link
+                to={`${pathname}/stream`}
+                className="hover:text-white text-zinc-200 font-semibold p-4 rounded-xl bg-[#6556CD]"
+              >
+                <i className="ri-play-fill mr-2"></i>
+                Stream{" "}
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -201,44 +218,44 @@ const TvDetails = () => {
       <hr className="border-none h-[1px] bg-zinc-300" />
 
       <div className="p-5 mb-3">
-        <div className="flex justify-between items-center">
-          <h1 className="text-white text-3xl font-black mb-4">Seasons</h1>
-        </div>
-
-        <div className="w-full text-white overflow-x-auto overflow-y-hidden flex gap-x-6 pb-4">
-          {info.detail.seasons.map((s, i) => (
-            <div
-              key={i}
-              className="min-w-[15vw] max-w-[15vw] transform hover:scale-105 transition-transform duration-300"
-            >
-              <div className="flex flex-col bg-zinc-800 shadow-lg rounded-2xl overflow-hidden">
-                <img
-                  className="h-[40vh] w-full object-cover"
-                  src={
-                    s.poster_path
-                      ? `https://image.tmdb.org/t/p/original/${s.poster_path}`
-                      : `https://image.tmdb.org/t/p/original/${
-                          info.detail.backdrop_path || info.detail.poster_path
-                        }`
-                  }
-                  alt={s.name}
-                />
-                <div className="p-4">
-                  <h1 className="text-xl sm:text-2xl font-black mb-2">
-                    {s.name}
-                  </h1>
-                  <p className="text-zinc-400 text-sm">
-                    Episodes: {s.episode_count}
-                  </p>
-                  <p className="text-zinc-400 text-sm">
-                    Air Date: {s.air_date || "Unknown"}
-                  </p>
-                </div>
-              </div>
+  <div className="flex justify-between items-center">
+    <h1 className="text-white text-3xl font-black mb-4">Seasons</h1>
+  </div>
+    <div className="w-full text-white overflow-x-auto flex gap-x-6 pb-4">
+      {info.detail.seasons.map((s, i) => (
+        <div
+          key={i}
+          className="min-w-[60vw] sm:min-w-[30vw] md:min-w-[20vw] lg:min-w-[15vw] max-w-[60vw] sm:max-w-[30vw] md:max-w-[20vw] lg:max-w-[15vw] transform hover:scale-105 transition-transform duration-300"
+        >
+          <div className="flex flex-col bg-zinc-800 shadow-lg rounded-2xl overflow-hidden">
+            <img
+              className="h-[30vh] sm:h-[35vh] md:h-[40vh] w-full object-cover"
+              src={
+                s.poster_path
+                  ? `https://image.tmdb.org/t/p/original/${s.poster_path}`
+                  : `https://image.tmdb.org/t/p/original/${
+                      info.detail.backdrop_path || info.detail.poster_path
+                    }`
+              }
+              alt={s.name}
+            />
+            <div className="p-4">
+              <h1 className="text-lg sm:text-xl md:text-2xl font-black mb-2">
+                {s.name}
+              </h1>
+              <p className="text-zinc-400 text-xs sm:text-sm">
+                Episodes: {s.episode_count}
+              </p>
+              <p className="text-zinc-400 text-xs sm:text-sm">
+                Air Date: {s.air_date || "Unknown"}
+              </p>
             </div>
-          ))}
+          </div>
         </div>
-      </div>
+      ))}
+    </div>
+</div>
+
       <hr className="border-none h-[1px] bg-zinc-300" />
 
       {/* Casts Section */}
@@ -277,7 +294,7 @@ const TvDetails = () => {
 
       {/* Recommendations */}
       <hr className="border-none h-[1px] bg-zinc-300" />
-      {(info.recommendations.length > 0 || info.similar.length>0) && (
+      {(info.recommendations.length > 0 || info.similar.length > 0) && (
         <div className="p-5 ">
           <div className="flex justify-between items-center">
             <h1 className="text-white text-3xl font-black mb-4">

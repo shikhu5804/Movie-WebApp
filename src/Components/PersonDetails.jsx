@@ -53,7 +53,7 @@ const PersonDetails = () => {
         {/* Left Section */}
         <div className="mt-5 lg:w-[20%] flex-col mb-5">
           <img
-            className="h-[60vh] w-[50vh] hover:scale-105 shadow-lg object-cover duration-150 mb-3 rounded-2xl"
+            className="h-[60vh] w-[50vh] hover:scale-[1.009] shadow-lg object-cover duration-150 mb-3 rounded-2xl"
             src={`https://image.tmdb.org/t/p/original/${info.detail.profile_path}`}
             alt={info.detail.title}
           />

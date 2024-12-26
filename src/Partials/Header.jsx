@@ -33,7 +33,7 @@ const Header = ({ setLoading }) => {
 
   return (
     <div
-      className="h-[70vh] relative w-screen flex flex-col items-start justify-end p-[7%]"
+      className="h-[70vh] relative w-screen flex flex-col items-start justify-end p-[5%]"
       style={{
         background: `linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .5), rgba(0, 0, 0, .8)), url(https://image.tmdb.org/t/p/original/${
           wallpaper.backdrop_path || wallpaper.profile_path
@@ -43,12 +43,14 @@ const Header = ({ setLoading }) => {
         backgroundRepeat: "no-repeat",
       }}
     >
+     
       <h1 className="text-6xl font-black text-white">
         {wallpaper.name ||
           wallpaper.title ||
           wallpaper.original_name ||
           wallpaper.original_title}
       </h1>
+     
       <p className="text-zinc-300 w-[60%] mt-5">
         {wallpaper.overview.slice(0, 200)}
         <Link
@@ -58,6 +60,7 @@ const Header = ({ setLoading }) => {
           ...more
         </Link>
       </p>
+      <div >
       <p className="text-white mt-3 text-[2.2vh]">
         <i className="text-yellow-500 ri-megaphone-fill"></i>{" "}
         {wallpaper.release_date ? wallpaper.release_date : "NA"}
@@ -66,13 +69,27 @@ const Header = ({ setLoading }) => {
           {wallpaper.media_type.toUpperCase()}
         </Link>
       </p>
-      <Link
-        to={`/${wallpaper.media_type}/details/${wallpaper.id}/trailer`}
-        className="hover:text-white text-zinc-200 font-semibold p-4 mt-3 rounded-xl bg-[#6556CD]"
-      >
-        <i className="ri-play-fill mr-2"></i>
-        Watch Trailer
-      </Link>
+      </div>
+      <div className="flex mt-8 gap-5">
+        <div className="mb-10 ">
+          <Link
+            to={`/${wallpaper.media_type}/details/${wallpaper.id}/trailer`}
+            className="hover:text-white text-zinc-200 font-bold  p-4 rounded-xl bg-[#6556CD]"
+          >
+            <i className="ri-play-fill mr-2"></i>
+            Watch Trailer
+          </Link>
+        </div>
+        <div className="mb-10">
+          <Link
+            to={`/${wallpaper.media_type}/details/${wallpaper.id}/stream`}
+            className="hover:text-white text-zinc-200 font-bold p-4 rounded-xl bg-yellow-600"
+          >
+            <i className="ri-play-fill mr-2"></i>
+            Stream{" "}
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };
