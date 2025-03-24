@@ -100,7 +100,7 @@ const Topbar = ({ isHome, setLoading }) => {
               <input
                 onChange={(e) => setQuery(e.target.value)}
                 value={query}
-                className="bg-transparent mr-2 text-white font-bold w-full rounded-2xl text-sm pl-10 pr-10 py-2 border-2 border-purple-300 duration-300"
+                className="bg-transparent mr-2 text-xs text-white font-bold w-full rounded-2xl md:text-sm pl-10 pr-10 py-2 border-2 border-purple-300 duration-300"
                 type="text"
                 placeholder="Search Anything"
               />
