@@ -61,10 +61,10 @@ const Horicards = () => {
           stretch: 0,
           depth: 150,
           modifier: 1,
-          slideShadows: false,
+          slideShadows: true,
         }}
         autoplay={{
-          delay: 3000,
+          delay: 4000,
           disableOnInteraction: false,
         }}
         mousewheel={{
