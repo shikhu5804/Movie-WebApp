@@ -11,10 +11,10 @@ const Home = () => {
 
   return (
     <div className="w-[100%]">
-    <div className="flex w-[20%] relative z-20 overflow-hidden">
+    {/* <div className="flex w-[20%] relative z-20 overflow-hidden">
       <Sidenav />
-       </div>
-      <div className="w-[80%] absolute  bg-zinc-900 h-full ml-[20%] pl-3 overflow-x-hidden">
+       </div> */}
+      <div className="w-full absolute  bg-zinc-900 h-full overflow-x-hidden">
       {!loading && <Topbar isHome={true} />}
       <Header setLoading={setLoading} />
         <Horicards />
