@@ -1,8 +1,11 @@
 import React from "react";
+import Topbar from "../Partials/Topbar";
 
 const ContactShikhar = () => {
   document.title = "Contact Me";
   return (
+    <>
+    <Topbar />
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white p-5">
       <div className="max-w-4xl w-full bg-gray-800 text-white shadow-2xl rounded-lg overflow-hidden transform transition-transform hover:scale-105 duration-500">
         <div className="p-10">
@@ -57,6 +60,7 @@ const ContactShikhar = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

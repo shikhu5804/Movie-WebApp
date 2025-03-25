@@ -2,11 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import noimage from "/noimage.png";
 
-const Horicards = ({ trending }) => {
+const Horicards = ({ trending, variant = "default" }) => {
+  const variants = {
+    default: "backdrop-blur-3xl ", 
+    people: "backdrop-brightness-75 ", 
+  };
+
   return (
     <div className="mt-2 mb-9">
-     
-
       <div className="w-full text-white overflow-x-auto overflow-y-hidden flex gap-x-6 pb-5">
         {trending.map((d, i) => (
           <Link
@@ -15,7 +18,7 @@ const Horicards = ({ trending }) => {
             className="w-[150px] sm:w-[180px] min-w-[150px] sm:min-w-[220px] flex-shrink-0"
           >
             <div className="transform hover:scale-[1.02] transition-transform duration-300 h-full">
-              <div className="flex flex-col backdrop-blur-3xl shadow-lg rounded-2xl overflow-hidden h-full">
+              <div className={`flex flex-col shadow-lg rounded-2xl overflow-hidden h-full ${variants[variant]}`}>
                 {/* Image Section */}
                 <img
                   className="h-[160px] sm:h-[220px] w-full object-cover"

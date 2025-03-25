@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Topbar from "../Partials/Topbar";
 
 const AboutUs = () => {
     document.title="About Me"
   return (
+    <>
+    <Topbar />
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white px-5">
       <div className="max-w-4xl w-full bg-gray-800 text-white shadow-lg rounded-lg overflow-hidden transform transition-transform hover:scale-105 duration-500">
         <div className="p-10">
@@ -25,6 +28,7 @@ const AboutUs = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
