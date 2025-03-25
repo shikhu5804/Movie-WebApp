@@ -36,62 +36,69 @@ const TvDetails = () => {
     <div
       className="h-[100vh] relative overflow-auto w-full p-5"
       style={{
-        background: `linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .5), rgba(0, 0, 0, .6)), url(https://image.tmdb.org/t/p/original/${info.detail.backdrop_path})`,
+        background: `linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6), rgba(0, 0, 0, .8)), url(https://image.tmdb.org/t/p/original/${info.detail.backdrop_path})`,
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
       }}
     >
       {/* Topbar */}
-      <nav className="flex items-center justify-between mb-2 px-6 bg-black/5 text-xl text-white">
-        {/* Back Button */}
-        <div className="flex gap-10">
+      <nav className="flex flex-wrap items-center justify-between py-4 px-4 sm:px-6 bg-black/5 text-white">
+        {/* Back & Home Buttons */}
+        <div className="flex items-center gap-6">
           <i
             onClick={() => navigate(-1)}
             className="text-zinc-300 text-3xl hover:text-[#6556CD] ri-arrow-left-line cursor-pointer transition duration-300"
           ></i>
 
-          {/* Logo or Home Icon */}
           <i
-            onClick={() => navigate("/")} // Navigating to the homepage
+            onClick={() => navigate("/")}
             className="text-zinc-300 text-3xl hover:text-[#6556CD] ri-home-4-line cursor-pointer transition duration-300"
             title="Go to Home"
           ></i>
         </div>
 
         {/* External Links */}
-        <div className="flex gap-6 items-center">
-          <a target="_blank" title="Website" href={info.detail.homepage}>
+        <div className="flex items-center gap-4 sm:gap-6">
+          <a
+            target="_blank"
+            title="Website"
+            href={info.detail.homepage}
+            className="hover:scale-105 transition-transform duration-300"
+          >
             <img
-              className="w-[7vh] rounded-md"
+              className="w-[6vh] sm:w-[7vh] rounded-md"
               src="https://cdn-icons-png.freepik.com/512/1927/1927746.png?ga=GA1.1.1925957040.1723322691"
-              alt="IMDB Logo"
+              alt="Website"
+              loading="lazy"
             />
           </a>
 
-          {/* Wikidata Link */}
           <a
             title="Wikidata"
             target="_blank"
             href={`https://www.wikidata.org/wiki/${info.externalid.wikidata_id}`}
+            className="hover:scale-105 transition-transform duration-300"
           >
             <img
-              className="w-[6vh] rounded-md"
+              className="w-[5vh] sm:w-[6vh] rounded-md"
               src="https://cdn-icons-png.freepik.com/512/2274/2274790.png?ga=GA1.1.1925957040.1723322691"
-              alt="IMDB Logo"
+              alt="Wikidata"
+              loading="lazy"
             />
           </a>
 
-          {/* IMDb Link */}
           <a
-            title="Imdb"
+            title="IMDb"
             target="_blank"
             href={`https://www.imdb.com/title/${info.externalid.imdb_id}`}
+            className="hover:scale-105 transition-transform duration-300"
           >
             <img
-              className="w-[9vh] rounded-md"
+              className="w-[7vh] sm:w-[9vh] rounded-md"
               src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg"
-              alt="IMDB Logo"
+              alt="IMDb"
+              loading="lazy"
             />
           </a>
         </div>
@@ -111,8 +118,8 @@ const TvDetails = () => {
           {/* Watch Providers */}
           <div className="flex flex-col">
             {info.watchproviders?.rent && (
-              <div className="flex items-center gap-2 text-white mt-3">
-                <h1>Available on Rent:</h1>
+              <div className="flex items-center gap-2  text-white mt-3">
+                <h1 className="">Available on Rent:</h1>
                 {info.watchproviders.rent.map((w) => (
                   <img
                     key={w.provider_id}
@@ -138,7 +145,7 @@ const TvDetails = () => {
             )}
             {info.watchproviders?.flatrate && (
               <div className="flex items-center gap-2 text-white mt-3">
-                <h1>Available on Platforms:</h1>
+                <h1 className="">Available on Platforms:</h1>
                 {info.watchproviders.flatrate.map((w) => (
                   <img
                     key={w.provider_id}
@@ -153,58 +160,66 @@ const TvDetails = () => {
         </div>
 
         {/* Right Section */}
-        <div className="lg:w-[70%] mt-2 ">
-          <h1 className="text-5xl text-white font-black mb-1">
+        <div className="lg:w-[70%] mt-1 ">
+          <h1 className="text-4xl md:text-5xl text-white font-black mb-1">
             {info.detail.original_name}
             <small className="text-zinc-200 text-2xl font-black">
               ({info.detail.first_air_date.split("-")[0]})
             </small>
           </h1>
-          <h1 className="text-zinc-200 font-semibold italic">
+          <h1 className="text-zinc-200 text-sm md:text-lg font-semibold italic">
             {info.detail.tagline}
           </h1>
-          <div className="flex items-center gap-10 mt-5">
-            <div className="rounded-full h-[6vh] w-[6vh] flex items-center justify-center font-black bg-yellow-600 text-white">
+          <div className="flex items-center gap-8 mt-5">
+            {/* Percentage Circle */}
+            <div className="rounded-full h-[50px] w-[50px] flex-shrink-0 mr-1 flex items-center justify-center font-black bg-yellow-600 text-white text-sm">
               {(info.detail.vote_average * 10).toFixed()}
               <sup>%</sup>
             </div>
-            <div className="flex flex-wrap gap-8 text-xl text-white font-semibold">
-              <h1>
-                <span className="underline italic">Released Date:</span>
-                <span className="font-black">
-                  {" "}
-                  {info.detail.first_air_date}
-                </span>
-              </h1>
-              <h1 className="font-black">
-                {info.detail.genres.map((g) => g.name).join(", ")}
-              </h1>
+
+            {/* Info Section */}
+            <div className="text-white md:gap-8 flex flex-col md:flex-row text-sm md:text-lg leading-5">
+              <p>
+                <span className="font-bold">Released:</span>{" "}
+                {info.detail.first_air_date}{" "}
+              </p>
+
+              <p>
+                <span className="font-bold">Genres:</span>{" "}
+                {info.detail.genres.map((g, index) => (
+                  <span key={g.id}>
+                    {index > 0 ? `, ` : ``}
+                    {g.name}
+                  </span>
+                ))}
+              </p>
             </div>
           </div>
+
           <h1 className="font-black text-white mt-4 text-3xl">Overview</h1>
           <p className="text-zinc-200 font-semibold mt-3">
             {info.detail.overview}
           </p>
-          <h1 className="font-black text-white mt-4 text-3xl">
+          <h1 className="font-black text-white mt-4 hidden md:block text-3xl">
             Available in Languages
           </h1>
-          <p className="text-zinc-200 font-semibold mt-3 mb-8">
+          <p className="text-zinc-200 font-semibold hidden md:block mt-3 mb-8">
             {info.translations.join(", ")}
           </p>
           <div className="flex gap-10">
-            <div className="mb-10 ">
+            <div className="mb-10 mt-10 md:mt-0">
               <Link
                 to={`${pathname}/trailer`}
-                className="hover:text-white text-zinc-200 font-semibold p-4 rounded-xl bg-[#6556CD]"
+                className="hover:text-white text-zinc-200 font-bold  p-4 rounded-xl bg-[#6556CD]"
               >
                 <i className="ri-play-fill mr-2"></i>
                 Watch Trailer
               </Link>
             </div>
-            <div className="mb-10">
+            <div className="mb-10 mt-10 md:mt-0 ">
               <Link
                 to={`${pathname}/stream`}
-                className="hover:text-white text-zinc-200 font-semibold p-4 rounded-xl bg-yellow-600"
+                className="hover:text-white text-zinc-200 font-bold p-4 rounded-xl bg-yellow-600"
               >
                 <i className="ri-play-fill mr-2"></i>
                 Stream{" "}
@@ -217,77 +232,109 @@ const TvDetails = () => {
       {/* Seasons */}
       <hr className="border-none h-[1px] bg-zinc-300" />
 
-      <div className="p-5 mb-3">
-  <div className="flex justify-between items-center">
-    <h1 className="text-white text-3xl font-black mb-4">Seasons</h1>
-  </div>
-    <div className="w-full text-white overflow-x-auto flex gap-x-6 pb-4">
-      {info.detail.seasons.map((s, i) => (
-        <div
-          key={i}
-          className="min-w-[60vw] sm:min-w-[30vw] md:min-w-[20vw] lg:min-w-[15vw] max-w-[60vw] sm:max-w-[30vw] md:max-w-[20vw] lg:max-w-[15vw] transform hover:scale-105 transition-transform duration-300"
-        >
-          <div className="flex flex-col bg-zinc-800 shadow-lg rounded-2xl overflow-hidden">
-            <img
-              className="h-[30vh] sm:h-[35vh] md:h-[40vh] w-full object-cover"
-              src={
-                s.poster_path
-                  ? `https://image.tmdb.org/t/p/original/${s.poster_path}`
-                  : `https://image.tmdb.org/t/p/original/${
-                      info.detail.backdrop_path || info.detail.poster_path
-                    }`
-              }
-              alt={s.name}
-            />
-            <div className="p-4">
-              <h1 className="text-lg sm:text-xl md:text-2xl font-black mb-2">
-                {s.name}
-              </h1>
-              <p className="text-zinc-400 text-xs sm:text-sm">
-                Episodes: {s.episode_count}
-              </p>
-              <p className="text-zinc-400 text-xs sm:text-sm">
-                Air Date: {s.air_date || "Unknown"}
-              </p>
+      {info.detail.seasons.length > 0 && (
+        <div className="p-2 md:p-4 ">
+          <div className="flex justify-between items-center">
+            <h1 className="text-white text-xl md:text-3xl font-black mb-3 sm:mb-4">
+              Seasons
+            </h1>
+          </div>
+
+          <div className="w-full text-white mb-4 overflow-x-auto overflow-y-hidden">
+            <div
+              className="flex gap-4 sm:gap-6 pb-4"
+              style={{ minWidth: `${info.detail.seasons.length * 150}px` }}
+            >
+              {info.detail.seasons.map((s, i) => (
+                <div
+                  key={i}
+                  className="w-[150px] sm:w-[180px] min-w-[150px] sm:min-w-[220px] flex-shrink-0"
+                >
+                  <div className="transform hover:scale-[1.02] transition-transform duration-300 h-full">
+                    <div className="flex flex-col shadow-lg backdrop-blur-3xl rounded-2xl overflow-hidden h-full">
+                      {" "}
+                      <img
+                        className="h-[160px] sm:h-[220px] w-full object-cover"
+                        src={
+                          s.poster_path
+                            ? `https://image.tmdb.org/t/p/original/${s.poster_path}`
+                            : `https://image.tmdb.org/t/p/original/${
+                                info.detail.backdrop_path ||
+                                info.detail.poster_path
+                              }`
+                        }
+                        alt={s.name}
+                        loading="lazy"
+                        style={{ objectPosition: "center 20%" }}
+                      />
+                      <div className="p-3 sm:p-4 flex-grow">
+                        <h1 className="text-lg font-bold sm:text-md sm:font-black mb-1 sm:mb-2 line-clamp-2">
+                          {s.name}
+                        </h1>
+                        <p className="text-zinc-200 text-sm line-clamp-2">
+                          Episodes: {s.episode_count}
+                        </p>
+                        <p className="text-zinc-200 text-sm line-clamp-2">
+                          Air Date: {s.air_date || "Unknown"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      ))}
-    </div>
-</div>
+      )}
 
       <hr className="border-none h-[1px] bg-zinc-300" />
 
       {/* Casts Section */}
       {info.credits.cast.length > 0 && (
-        <div className="p-5 ">
+        <div className="p-2 md:p-4 ">
           <div className="flex justify-between items-center">
-            <h1 className="text-white text-3xl font-black mb-4">Casts</h1>
+            <h1 className="text-white text-xl md:text-3xl font-black mb-3 sm:mb-4">
+              Casts
+            </h1>
           </div>
-          <div className="w-full text-white mb-10 overflow-x-auto overflow-y-hidden flex gap-x-6 pb-4">
-            {info.credits.cast.map((c, i) => (
-              <Link to={`/person/details/${c.id}`} key={i}>
-                <div className="min-w-[15vw] max-w-[15vw]  transform hover:scale-105 transition-transform duration-300">
-                  <div className="flex flex-col bg-zinc-800 shadow-lg rounded-2xl overflow-hidden">
-                    <img
-                      className="h-[35vh] w-full object-cover"
-                      src={
-                        c.profile_path
-                          ? `https://image.tmdb.org/t/p/original/${c.profile_path}`
-                          : noimage
-                      }
-                      alt={c.name}
-                    />
-                    <div className="p-4">
-                      <h1 className="text-xl sm:text-xl font-black mb-2">
-                        {c.name}
-                      </h1>
-                      <p className="text-zinc-400 text-sm">{c.character}</p>
+
+          <div className="w-full text-white mb-4 overflow-x-auto overflow-y-hidden">
+            <div
+              className="flex gap-4 sm:gap-6 pb-4"
+              style={{ minWidth: `${info.credits.cast.length * 150}px` }}
+            >
+              {info.credits.cast.map((c) => (
+                <Link
+                  key={c.id}
+                  to={`/person/details/${c.id}`}
+                  className="w-[150px] sm:w-[180px] min-w-[150px] sm:min-w-[220px] flex-shrink-0"
+                >
+                  <div className="transform hover:scale-[1.02] transition-transform duration-300 h-full">
+                    <div className="flex flex-col shadow-lg backdrop-blur-3xl rounded-2xl overflow-hidden h-full">
+                      <img
+                        className="h-[160px] sm:h-[220px] w-full object-cover"
+                        src={
+                          c.profile_path
+                            ? `https://image.tmdb.org/t/p/original/${c.profile_path}`
+                            : noimage
+                        }
+                        alt={c.name}
+                        loading="lazy"
+                        style={{ objectPosition: "center 20%" }}
+                      />
+                      <div className="p-3 sm:p-4 flex-grow">
+                        <h1 className="text-lg font-bold sm:text-md sm:font-black mb-1 sm:mb-2 line-clamp-2">
+                          {c.name}
+                        </h1>
+                        <p className="text-zinc-200 text-sm line-clamp-2">
+                          {c.character}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       )}
@@ -295,9 +342,9 @@ const TvDetails = () => {
       {/* Recommendations */}
       <hr className="border-none h-[1px] bg-zinc-300" />
       {(info.recommendations.length > 0 || info.similar.length > 0) && (
-        <div className="p-5 ">
+        <div className="p-2 md:p-4 ">
           <div className="flex justify-between items-center">
-            <h1 className="text-white text-3xl font-black mb-4">
+            <h1 className="text-white text-xl md:text-3xl  font-black mb-4">
               Recommendations & Similars
             </h1>
           </div>
