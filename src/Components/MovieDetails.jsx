@@ -293,6 +293,7 @@ const MovieDetails = () => {
               ? info.recommendations
               : info.similar
           }
+          variant="default" 
         />
       )}
       <Outlet />

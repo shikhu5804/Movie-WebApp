@@ -355,6 +355,7 @@ const TvDetails = () => {
                   ? info.recommendations
                   : info.similar
               }
+              variant="default"
             />
           )}
         </div>
